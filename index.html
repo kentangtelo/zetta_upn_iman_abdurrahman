@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Purchasing Function</title>
+    <style>
+        label {
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+        }
+
+        input[type="number"] {
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Book Purchasing Function</h1>
+    <form id="purchase-form">
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title">
+        </div>
+        <div>
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author">
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            $<input type="number" id="price" name="price" min="0" step="0.01">
+        </div>
+        <div>
+            <label for="discount">Discount:</label>
+            <input type="number" id="discount" name="discount" min="0" max="100" step="1">%
+        </div>
+        <div>
+            <label for="tax">Tax:</label>
+            <input type="number" id="tax" name="tax" min="0" max="100" step="1">%
+        </div>
+        <div>
+            <button type="submit">Purchase</button>
+        </div>
+    </form>
+    <hr>
+    <div id="purchase-results"></div>
+    <script>
+        function purchaseBook(title, author, price, discountPercent, taxPercent) {
+            // Constants
+            const TAX_RATE = 0.01;
+
+            // Variables
+            let hasDiscount = true;
+            let discountAmount = 0;
+            let discountedPrice = 0;
+            let taxAmount = 0;
+            let priceAfterTax = 0;
+
+            // Calculate discount amount and discounted price
+            if (hasDiscount) {
+                discountAmount = price * (discountPercent / 100);
+                discountedPrice = price - discountAmount;
+            } else {
+                discountedPrice = price;
+            }
+
+            // Calculate tax amount and price after tax
+            taxAmount = discountedPrice * (taxPercent / 100);
+            priceAfterTax = discountedPrice + taxAmount;
+
+            // Display results
+            let resultsElement = document.getElementById('purchase-results');
+            resultsElement.innerHTML = `
+          <p><strong>Title:</strong> ${title}</p>
+          <p><strong>Author:</strong> ${author}</p>
+          <p><strong>Price:</strong> $${price.toFixed(2)}</p>
+          <p><strong>Discount:</strong> ${discountPercent}%</p>
+          <p><strong>Discount amount:</strong> $${discountAmount.toFixed(2)}</p>
+          <p><strong>Price after discount:</strong> $${discountedPrice.toFixed(2)}</p>
+          <p><strong>Tax:</strong> ${taxPercent}%</p>
+          <p><strong>Tax amount:</strong> $${taxAmount.toFixed(2)}</p>
+          <p><strong>Price after tax:</strong> $${priceAfterTax.toFixed(2)}</p>
+        `;
+        }
+
+        let formElement = document.getElementById('purchase-form');
+        formElement.addEventListener('submit', function (event) {
+            event.preventDefault(); //
+            let title = document.getElementById('title').value;
+            let author = document.getElementById('author').value;
+            let price = parseFloat(document.getElementById('price').value);
+            let discount = parseInt(document.getElementById('discount').value);
+            let tax = parseInt(document.getElementById('tax').value);
+            purchaseBook(title, author, price, discount, tax);
+        });
+    </script>
+</body>
+
+</html>
