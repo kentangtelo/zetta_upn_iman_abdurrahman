@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Book Purchasing Function</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        ul {
+            margin: 10px 0;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="bookForm">
+        <div>
+            <label for="bookTitle">Book Title:</label>
+            <input type="text" id="bookTitle" name="bookTitle" />
+        </div>
+        <div>
+            <label for="bookAuthor">Book Author:</label>
+            <input type="text" id="bookAuthor" name="bookAuthor" />
+        </div>
+        <div>
+            <label for="bookPrice">Book Price:</label>
+            <input type="number" id="bookPrice" name="bookPrice" step="0.01" />
+        </div>
+        <div>
+            <label for="discountPercentage">Discount Percentage:</label>
+            <input type="number" id="discountPercentage" name="discountPercentage" step="0.01" />
+        </div>
+        <div>
+            <label for="taxPercentage">Tax Percentage:</label>
+            <input type="number" id="taxPercentage" name="taxPercentage" step="0.01" />
+        </div>
+        <div>
+            <label for="stockAmount">Amount of Stock:</label>
+            <input type="number" id="stockAmount" name="stockAmount" />
+        </div>
+        <div>
+            <label for="purchasedAmount">Amount of Purchased Book:</label>
+            <input type="number" id="purchasedAmount" name="purchasedAmount" />
+        </div>
+        <div>
+            <label for="creditTerm">Credit Term (in months):</label>
+            <input type="number" id="creditTerm" name="creditTerm" />
+        </div>
+        <div>
+            <button type="submit">Purchase</button>
+        </div>
+    </form>
+
+    <div id="result"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
