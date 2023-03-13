@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Book Purchase Form</title>
+    <style>
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type=text],
+        input[type=number] {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #purchase-results {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Book Purchase Form</h1>
+    <form id="purchase-form">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" min="0" step="0.01" required>
+        <label for="discount">Discount:</label>
+        <input type="number" id="discount" name="discount" min="0" max="100" step="1" required>
+        <label for="tax">Tax:</label>
+        <input type="number" id="tax" name="tax" min="0" max="100" step="1" required>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" min="0" required>
+        <label for="purchased">Purchased:</label>
+        <input type="number" id="purchased" name="purchased" min="0" required>
+        <button type="submit">Purchase Book</button>
+    </form>
+    <div id="purchase-results"></div>
+    <div id="remaining-stock"></div>
+    <script>
+        function purchaseBook(title, author, price, discountPercent, taxPercent, stock, purchased) {
+            // Constants
+            const TAX_RATE = 0.01;
+
+            // Variables
+            let hasDiscount = true;
+            let discountAmount = 0;
+            let discountedPrice = 0;
+            let taxAmount = 0;
+            let priceAfterTax = 0;
+            let total = 0;
+            let remainingStock = stock - purchased;
+
+            // Calculate discount amount and discounted price
+            if (hasDiscount) {
+                discountAmount = price * (discountPercent / 100);
+                discountedPrice = price - discountAmount;
+            } else {
+                discountedPrice = price;
+            }
+
+            // Calculate tax amount and price after tax
+            taxAmount = discountedPrice * (taxPercent / 100);
+            priceAfterTax = discountedPrice + taxAmount;
+
+            // Calculate total price
+            for (let i = 1; i <= purchased; i++) {
+                let currentPrice = 0;
+                if (i === 1) {
+                    currentPrice = priceAfterTax;
+                } else {
+                    currentPrice = priceAfterTax * i;
+                }
+                if (remainingStock < 0) {
+                    return {
+                        success: false,
+                        message: "Not enough stock available.",
+                    };
+                }
+                total += currentPrice;
+                if (i === purchased) {
+                    remainingStock = stock - i;
+                }
+                if (remainingStock <= 0) {
+                    break;
+                }
+            }
+            // Format results
+            discountAmount = discountAmount.toFixed(2);
+            discountedPrice = discountedPrice.toFixed(2);
+            taxAmount = taxAmount.toFixed(2);
+            priceAfterTax = priceAfterTax.toFixed(2);
+            total = total.toFixed(2);
+
+            return {
+                success: true,
+                message: "Purchase successful!",
+                data: {
+                    title: title,
+                    author: author,
+                    price: price,
+                    discount: discountPercent,
+                    discountedPrice: discountedPrice,
+                    discountAmount: discountAmount,
+                    tax: taxPercent,
+                    priceAfterTax: priceAfterTax,
+                    taxAmount: taxAmount,
+                    total: total,
+                },
+                remainingStock: remainingStock
+            };
+        }
+
+        const form = document.getElementById("purchase-form");
+        const results = document.getElementById("purchase-results");
+        const remaining = document.getElementById("remaining-stock");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const title = document.getElementById("title").value;
+            const author = document.getElementById("author").value;
+            const price = parseFloat(document.getElementById("price").value);
+            const discount = parseInt(document.getElementById("discount").value);
+            const tax = parseInt(document.getElementById("tax").value);
+            const stock = parseInt(document.getElementById("stock").value);
+            const purchased = parseInt(document.getElementById("purchased").value);
+
+            const purchaseResult = purchaseBook(
+                title,
+                author,
+                price,
+                discount,
+                tax,
+                stock,
+                purchased
+            );
+
+            if (purchaseResult.success) {
+                results.innerHTML = `
+        <p>${purchaseResult.message}</p>
+        <ul>
+          <li>Title: ${purchaseResult.data.title}</li>
+          <li>Author: ${purchaseResult.data.author}</li>
+          <li>Price: $${purchaseResult.data.price.toFixed(2)}</li>
+          <li>Discount: ${purchaseResult.data.discount}%</li>
+          <li>Discount Amount: $${purchaseResult.data.discountAmount}</li>
+          <li>Discounted Price: $${purchaseResult.data.discountedPrice}</li>
+          <li>Tax: ${purchaseResult.data.tax}%</li>
+          <li>Tax Amount: $${purchaseResult.data.taxAmount}</li>
+          <li>Price After Tax: $${purchaseResult.data.priceAfterTax}</li>
+          <li>Total: $${purchaseResult.data.total}</li>
+        </ul>
+      `;
+                remaining.innerHTML = `
+        <p>Remaining Stock: ${purchaseResult.remainingStock}</p>
+      `;
+            } else {
+                results.innerHTML = `
+        <p>${purchaseResult.message}</p>
+      `;
+                remaining.innerHTML = "";
+            }
+        });
+    </script>
