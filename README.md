@@ -7,9 +7,9 @@
 - [x] javascript_day_2 [link](https://github.com/kentangtelo/zetta_upn_iman_abdurrahman/tree/javascript_day_2)
 - [x] javascript_day_3 [link](https://github.com/kentangtelo/zetta_upn_iman_abdurrahman/tree/javascript_day_3)
 - [x] javascript_day_4 [link](https://github.com/kentangtelo/zetta_upn_iman_abdurrahman/tree/javascript_day_4)
-- [ ] javascript_day_5
-- [ ] javascript_day_6
-- [ ] javascript_day_7
+- [x] javascript_day_5
+- [x] javascript_day_6
+- [x] javascript_day_7
 - [ ] mongodb_day_1
 - [ ] mongodb_day_2
 - [ ] mongodb_day_3
