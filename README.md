@@ -10,7 +10,7 @@
 - [x] javascript_day_5
 - [x] javascript_day_6
 - [x] javascript_day_7
-- [ ] mongodb_day_1
+- [x] mongodb_day_1
 - [ ] mongodb_day_2
 - [ ] mongodb_day_3
 - [ ] mongodb_day_4
