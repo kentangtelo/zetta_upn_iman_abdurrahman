@@ -10,7 +10,13 @@ const Books = require(`./Books.model`);
 const PORT = 3000;
 const dbName = `book`;
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/" + dbName);
+mongoose.connect("mongodb://0.0.0.0:27017/" + dbName);
+let db = mongoose.connection;
+db.on("error", console.error.bind(console, "Database error!"));
+db.once("open", () => {
+  console.log("Database connected");
+});
+//lis
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -138,7 +144,7 @@ app.post("/bookPurchasing", isAuth, async (req, res) => {
 
   // set
   let setBooks = new Set();
-  setBooks.add([bookDetails]);
+  setBooks.add([detailBuku]);
   for (let i = 1; i < 10; i++) {
     setBooks.add("Buku" + i);
   }
