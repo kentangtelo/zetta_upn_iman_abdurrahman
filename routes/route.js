@@ -44,13 +44,9 @@ router.get("/beliBuku/bookShelf/filter/", isAuth, filterArrayKoleksiBookShelf);
 router.get("/beliBuku/bookShelf/filter/", isAuth, filterArrayKoleksiBookShelf);
 router.get("/beliBuku/bookShelf/listGenre/", isAuth, listKoleksiGenreBookShelf);
 
+router.get("/beliBuku/bookShelf/genreSetiapBuku/", isAuth, listGenreSetiapBuku);
 router.get(
-  "/bookPurchasing/bookShelf/genreSetiapBuku/",
-  isAuth,
-  listGenreSetiapBuku
-);
-router.get(
-  "/bookPurchasing/bookShelf/splitGenreSetiapBuku/",
+  "/beliBuku/bookShelf/splitGenreSetiapBuku/",
   isAuth,
   listGenreSetiapBukuUnwind
 );
