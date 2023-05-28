@@ -1,4 +1,4 @@
-var mongoose = require(`mongoose`);
+import mongoose from "mongoose";
 
 var bookDetailsSchema = new mongoose.Schema({
   judul: {
@@ -15,6 +15,18 @@ var bookDetailsSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: false,
+  },
+  genre: {
+    type: Array,
+    required: true,
+    unique: false,
+  },
+});
+
+var booksSchema = new mongoose.Schema({
+  buku: {
+    type: bookDetailsSchema,
+    required: true,
   },
   harga: {
     type: Number,
@@ -33,27 +45,5 @@ var bookDetailsSchema = new mongoose.Schema({
   },
 });
 
-var booksSchema = new mongoose.Schema({
-  detailBuku: {
-    type: bookDetailsSchema,
-    required: true,
-  },
-  jumlahBeli: {
-    type: Number,
-    required: true,
-    unique: false,
-  },
-  jangkaWaktuKredit: {
-    type: Number,
-    required: true,
-    unique: false,
-  },
-  hargaTambahan: {
-    type: Number,
-    required: true,
-    unique: false,
-  },
-});
-
 //Export the model
-module.exports = mongoose.model("Books", booksSchema);
+export default mongoose.model("Books", booksSchema);
