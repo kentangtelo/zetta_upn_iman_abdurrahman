@@ -13,9 +13,9 @@
 - [x] mongodb_day_1
 - [x] mongodb_day_2
 - [x] mongodb_day_3
-- [ ] mongodb_day_4
-- [ ] mongodb_day_5
-- [ ] mongodb_day_6
+- [x] mongodb_day_4
+- [x] mongodb_day_5
+- [x] mongodb_day_6
 - [ ] mongodb_day_7
 - [ ] graphql_day_1
 - [ ] graphql_day_2
