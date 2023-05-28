@@ -38,8 +38,8 @@ router.delete("/beliBuku/bookShelf", isAuth, deleteKoleksiBookShelf);
 
 router.get("/beliBuku/bookShelf", isAuth, filterBookShelfByID);
 
-router.get("/beliBuku/bookShelf/filter/", isAuth, filterArrayKoleksiBookShelf);
-router.get("/beliBuku/bookShelf/filter/", isAuth, filterArrayKoleksiBookShelf);
+router.get("/beliBuku/bookShelf/filter/", isAuth, filterBookShelfCollection);
+router.put("/beliBuku/bookShelf/filter/", isAuth, filterArrayKoleksiBookShelf);
 router.get("/beliBuku/bookShelf/listGenre/", isAuth, listKoleksiGenreBookShelf);
 
 export default router;
